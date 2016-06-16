@@ -67,7 +67,7 @@ public class ChartXAxisRendererBarChart: ChartXAxisRenderer
                 continue
             }
             
-            position.x = CGFloat(i * step) + CGFloat(i) * barData.groupSpace + barData.groupSpace / 2.0
+            position.x = CGFloat(i * step) + CGFloat(i) * barData.groupSpace + barData.groupSpace / 2.0 + xAxis.xOffset
             position.y = 0.0
             
             // consider groups (center label for each group)
