@@ -112,27 +112,26 @@ public class BarLineChartViewBase: ChartViewBase, BarLineScatterCandleBubbleChar
         
         self.highlighter = ChartHighlighter(chart: self)
         
-        // I want my own damn gesture recognizers thank you very much
-        // _tapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.tapGestureRecognized(_:)))
-        // _doubleTapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.doubleTapGestureRecognized(_:)))
-        // _doubleTapGestureRecognizer.nsuiNumberOfTapsRequired = 2
-        // _panGestureRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.panGestureRecognized(_:)))
+        _tapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.tapGestureRecognized(_:)))
+        _doubleTapGestureRecognizer = NSUITapGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.doubleTapGestureRecognized(_:)))
+        _doubleTapGestureRecognizer.nsuiNumberOfTapsRequired = 2
+        _panGestureRecognizer = NSUIPanGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.panGestureRecognized(_:)))
         
-        // _panGestureRecognizer.delegate = self
+        _panGestureRecognizer.delegate = self
         
-        // self.addGestureRecognizer(_tapGestureRecognizer)
-        // self.addGestureRecognizer(_doubleTapGestureRecognizer)
-        // self.addGestureRecognizer(_panGestureRecognizer)
+        self.addGestureRecognizer(_tapGestureRecognizer)
+        self.addGestureRecognizer(_doubleTapGestureRecognizer)
+        self.addGestureRecognizer(_panGestureRecognizer)
         
-        // _doubleTapGestureRecognizer.enabled = _doubleTapToZoomEnabled
-        // _panGestureRecognizer.enabled = _dragEnabled
+        _doubleTapGestureRecognizer.enabled = _doubleTapToZoomEnabled
+        _panGestureRecognizer.enabled = _dragEnabled
 
-        // #if !os(tvOS)
-        //    _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
-        //    _pinchGestureRecognizer.delegate = self
-        //    self.addGestureRecognizer(_pinchGestureRecognizer)
-        //    _pinchGestureRecognizer.enabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
-        // #endif
+        #if !os(tvOS)
+           _pinchGestureRecognizer = NSUIPinchGestureRecognizer(target: self, action: #selector(BarLineChartViewBase.pinchGestureRecognized(_:)))
+           _pinchGestureRecognizer.delegate = self
+           self.addGestureRecognizer(_pinchGestureRecognizer)
+           _pinchGestureRecognizer.enabled = _pinchZoomEnabled || _scaleXEnabled || _scaleYEnabled
+        #endif
     }
     
     public override func observeValueForKeyPath(keyPath: String?, ofObject object: AnyObject?, change: [String : AnyObject]?, context: UnsafeMutablePointer<Void>)
